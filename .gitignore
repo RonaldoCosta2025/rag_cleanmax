@@ -1,0 +1,30 @@
+# Quando o Python executa um programa, ele gera arquivos compilados.
+
+__pycache__/
+
+# Também são arquivos compilados.
+
+# Não fazem parte do código.
+*.pyc
+
+# Muito importante.
+
+# Aqui ficará sua chave do Gemini.
+
+# Nunca devemos enviar uma chave de API para o GitHub.
+.env
+
+
+# Esse diretório pode ficar grande.
+
+# Além disso, pode ser reconstruído a partir dos documentos.
+
+# Não vale a pena versioná-lo.
+vectorstore/
+
+# É o ambiente virtual do Python.
+.venv/
+
+
+# Configurações pessoais do VS Code.
+.vscode/
