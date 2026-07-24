@@ -1,16 +1,25 @@
 from pathlib import Path
-from pypdf import PdfReader
 
-# funcao para carregaro pdf
-def carregar_pdf(caminho_pdf: Path) -> str:
+import fitz
 
-    leitor = PdfReader(caminho_pdf)
+from src.ingestion.document import Documento
 
-    texto_completo = ''
 
-    for pagina in leitor.pages:
-        texto = pagina.extract_text()
+def carregar_pdf(caminho: Path):
 
-        if texto:
-            texto_completo += texto + '\n'
-    return texto_completo
+    texto = ""
+
+    with fitz.open(caminho) as pdf:
+
+        for pagina in pdf:
+
+            texto += pagina.get_text()
+
+
+    documento = Documento(
+        texto=texto,
+        arquivo=caminho.name
+    )
+
+
+    return documento

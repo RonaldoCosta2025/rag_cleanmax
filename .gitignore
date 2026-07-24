@@ -20,11 +20,15 @@ __pycache__/
 # Além disso, pode ser reconstruído a partir dos documentos.
 
 # Não vale a pena versioná-lo.
+# Banco vetorial
 vectorstore/
-
-# É o ambiente virtual do Python.
-.venv/
-
 
 # Configurações pessoais do VS Code.
 .vscode/
+
+# Ambiente virtual
+venv/
+.venv/
+
+# Modelos baixados
+models/
