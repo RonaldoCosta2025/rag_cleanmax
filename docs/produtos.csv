@@ -1,0 +1,6 @@
+codigo,nome,categoria,preco,estoque
+IND100,Detergente Industrial,Industrial,145.00,50
+DES200,Desengraxante Industrial,Industrial,89.90,35
+LIM300,Limpa Vidros,Doméstica,24.90,80
+SAN400,Sanitizante Hospitalar,Hospitalar,72.50,40
+DET500,Detergente Neutro,Doméstica,18.90,120
