@@ -9,6 +9,8 @@ from src.ingestion.csv_loader import carregar_csv
 
 from src.ingestion.txt_loader import carregar_txt
 
+from src.ingestion.xlsx_loader import carregar_xlsx
+
 
 # Define a função que escolhe automaticamente o loader correto.
 def carregar_documento(caminho: Path):
@@ -31,6 +33,11 @@ def carregar_documento(caminho: Path):
     if extensao == '.txt':
          # Usa o loader de TXT.
         return carregar_txt(caminho)
+
+    # xlxs
+    if extensao == '.xlsx':
+
+        return carregar_xlsx(caminho)
 
     # Informa que o formato ainda não é suportado.
     raise ValueError(
