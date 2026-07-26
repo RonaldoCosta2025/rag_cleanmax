@@ -7,6 +7,9 @@ from dotenv import load_dotenv
 # Importa o cliente da API Gemini.
 from google import genai
 
+# Importa a exceção lançada pela API.
+from google.genai.errors import ClientError
+
 
 # Carrega as informações presentes no arquivo .env.
 load_dotenv()
@@ -28,15 +31,42 @@ client = genai.Client(api_key=api_key)
 # Define uma função responsável por enviar prompts para o Gemini.
 def gerar_resposta(prompt: str):
 
-    # Envia o prompt para o modelo Gemini.
-    resposta = client.models.generate_content(
+    try:
 
-        # Define o modelo que será utilizado.
-        model="gemini-3.6-flash",
+        # Envia o prompt para o modelo Gemini.
+        resposta = client.models.generate_content(
 
-        # Envia o prompt recebido pela função.
-        contents=prompt
-    )
+            # Modelo utilizado.
+            model="gemini-3.6-flash",
 
-    # Retorna somente o texto produzido pelo modelo.
-    return resposta.text
+            # Prompt enviado ao modelo.
+            contents=prompt
+        )
+
+        # Retorna apenas o texto gerado.
+        return resposta.text
+
+    # Trata erros retornados pela API.
+    except ClientError as erro:
+
+        # Converte o erro para texto.
+        mensagem = str(erro)
+
+        # Verifica se a cota foi excedida.
+        if "RESOURCE_EXHAUSTED" in mensagem:
+
+            return (
+                "O limite de utilização da API Gemini foi atingido.\n\n"
+                "A busca nos documentos foi realizada com sucesso, "
+                "mas não foi possível gerar a resposta porque a cota "
+                "gratuita da API foi excedida.\n\n"
+                "Tente novamente mais tarde."
+            )
+
+        # Retorna uma mensagem genérica para outros erros da API.
+        return f"Erro ao comunicar com o Gemini:\n\n{mensagem}"
+
+    # Captura qualquer outro erro inesperado.
+    except Exception as erro:
+
+        return f"Erro inesperado:\n\n{erro}"

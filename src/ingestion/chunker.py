@@ -8,8 +8,8 @@ from src.ingestion.document import Documento
 # Define a função responsável por criar chunks de vários documentos.
 def criar_chunks(
     documentos: list[Documento],
-    tamanho_chunk: int = 500,
-    overlap: int = 100
+    tamanho_chunk: int = 300,
+    overlap: int = 50
 ) -> list[Chunk]:
 
     # Lista que armazenará todos os chunks de todos os documentos.

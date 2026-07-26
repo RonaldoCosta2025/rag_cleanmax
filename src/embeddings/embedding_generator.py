@@ -2,7 +2,9 @@
 from sentence_transformers import SentenceTransformer
 
 # Carrega o modelo uma única vez
-modelo = SentenceTransformer("all-MiniLM-L6-v2")
+modelo = SentenceTransformer(
+    "paraphrase-multilingual-MiniLM-L12-v2"
+)
 
 
 def gerar_embedding(texto: str):

@@ -1,60 +1,66 @@
-# Importa Path para trabalhar com caminhos de arquivos.
-from pathlib import Path
-
-# Importa a função que carrega o PDF.
-from src.ingestion.pdf_loader import carregar_pdf
-
-# Importa a função que cria os chunks.
-from src.ingestion.chunker import criar_chunks
-
-# Importa as funções que geram embeddings.
-from src.embeddings.embedding_generator import gerar_embeddings
-
-# Importa as funções responsáveis pelo FAISS e pelos chunks.
-from src.vectorstore.faiss_store import criar_indice, salvar_indice, salvar_chunks
+# Importa as funções do banco vetorial.
+from src.vectorstore.faiss_store import (
+    carregar_indice,
+    carregar_chunks,
+    buscar
+)
 
 
-# Define o caminho do PDF utilizado no teste.
-arquivo = Path("docs/01_Apresentacao_Empresa.pdf")
+# Importa a função que gera embeddings.
+from src.embeddings.embedding_generator import gerar_embedding
 
-# Carrega o documento PDF.
-documento = carregar_pdf(arquivo)
 
-# Divide o documento em chunks.
-chunks = criar_chunks(documento)
+# Importa o pipeline RAG.
+from src.rag.pipeline import responder
 
-# Extrai o texto de cada chunk.
-textos = [chunk.texto for chunk in chunks]
 
-# Gera os embeddings dos textos.
-embeddings = gerar_embeddings(textos)
+# Caminhos dos arquivos salvos.
+caminho_indice = "vectorstore/index.faiss"
+caminho_chunks = "vectorstore/chunks.pkl"
 
-# Cria o índice FAISS.
-indice = criar_indice(embeddings)
 
-# Define a pasta onde os dados serão armazenados.
-pasta_vectorstore = Path("vectorstore")
+# Carrega o índice FAISS.
+indice = carregar_indice(caminho_indice)
 
-# Cria a pasta caso ela ainda não exista.
-pasta_vectorstore.mkdir(exist_ok=True)
 
-# Define o caminho do índice FAISS.
-caminho_indice = pasta_vectorstore / "index.faiss"
+# Carrega os chunks.
+chunks = carregar_chunks(caminho_chunks)
 
-# Define o caminho onde os chunks serão armazenados.
-caminho_chunks = pasta_vectorstore / "chunks.pkl"
 
-# Salva o índice FAISS.
-salvar_indice(indice, caminho_indice)
+# Pergunta do usuário.
+pergunta = "Quais são os valores da empresa?"
 
-# Salva os chunks junto com seus metadados.
-salvar_chunks(chunks, caminho_chunks)
 
-# Mostra onde o índice foi salvo.
-print(f"Índice salvo em: {caminho_indice}")
+# Gera o vetor da pergunta.
+embedding_consulta = gerar_embedding(pergunta)
 
-# Mostra onde os chunks foram salvos.
-print(f"Chunks salvos em: {caminho_chunks}")
 
-# Mostra a quantidade de chunks armazenados.
-print(f"Quantidade de chunks: {len(chunks)}")
+# Busca os chunks mais relevantes.
+distancias, indices = buscar(
+    indice,
+    embedding_consulta,
+    quantidade=3
+)
+
+
+# Lista que armazenará os chunks encontrados.
+chunks_encontrados = []
+
+
+# Recupera os objetos Chunk.
+for indice_chunk in indices[0]:
+
+    chunk = chunks[indice_chunk]
+
+    chunks_encontrados.append(chunk)
+
+
+# Envia pergunta + chunks para o RAG.
+resposta = responder(
+    pergunta,
+    chunks_encontrados
+)
+
+
+# Exibe a resposta final.
+print(resposta)

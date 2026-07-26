@@ -17,6 +17,13 @@ from src.vectorstore.faiss_store import (
     salvar_chunks,
 )
 
+# Importa os caminhos centralizados do projeto.
+from src.config import (
+    VECTORSTORE_DIR,
+    INDEX_FILE,
+    CHUNKS_FILE,
+)
+
 
 # Define a função principal da ingestão.
 def ingestir_documentos(pasta_documentos: Path):
@@ -57,22 +64,18 @@ def ingestir_documentos(pasta_documentos: Path):
     # Cria o índice vetorial.
     indice = criar_indice(embeddings)
 
-    # Define a pasta onde o banco vetorial será salvo.
-    pasta_vectorstore = Path("vectorstore")
-
-    # Cria a pasta caso ela ainda não exista.
-    pasta_vectorstore.mkdir(exist_ok=True)
+    # Garante que a pasta do banco vetorial exista.
+    VECTORSTORE_DIR.mkdir(exist_ok=True)
 
     # Salva o índice FAISS.
     salvar_indice(
         indice,
-        pasta_vectorstore / "index.faiss"
+        INDEX_FILE
     )
 
-    # Salva todos os chunks.
     salvar_chunks(
         chunks,
-        pasta_vectorstore / "chunks.pkl"
+        CHUNKS_FILE
     )
 
     # Mostra uma mensagem de sucesso.

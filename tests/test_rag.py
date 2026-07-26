@@ -26,7 +26,7 @@ chunks = carregar_chunks(caminho_chunks)
 # Define a pergunta feita pelo usuário.
 #pergunta = "O que é a CleanMax?"
 
-pergunta = "Qual é o salário do diretor da CleanMax?"
+pergunta = "Qual o estoque do Detergente Neutro?"
 
 # Transforma a pergunta em um vetor numérico.
 embedding_pergunta = gerar_embedding(pergunta)
@@ -45,10 +45,26 @@ contextos = []
 fontes = []
 
 # Percorre os índices encontrados pelo FAISS.
+# for indice_chunk in indices[0]:
+
+#     # Recupera o Chunk correspondente ao índice encontrado.
+#     chunk = chunks[indice_chunk]
+
+#     # Adiciona o texto do chunk à lista de contextos.
+#     contextos.append(chunk.texto)
+
+#     # Adiciona o nome do arquivo à lista de fontes.
+#     fontes.append(chunk.arquivo)
+# Percorre os índices encontrados pelo FAISS.
 for indice_chunk in indices[0]:
 
-    # Recupera o Chunk correspondente ao índice encontrado.
+    # Recupera o Chunk correspondente.
     chunk = chunks[indice_chunk]
+
+    print("\nCHUNK ENCONTRADO")
+    print("Arquivo:", chunk.arquivo)
+    print(chunk.texto[:500])
+    print("----------------")
 
     # Adiciona o texto do chunk à lista de contextos.
     contextos.append(chunk.texto)
@@ -103,4 +119,5 @@ print(resposta)
 print("\nFONTES:")
 
 # Exibe os documentos utilizados na resposta.
+print(fontes_texto)
 print(fontes_texto)

@@ -9,6 +9,9 @@ from src.ingestion.document_loader import carregar_documento
 EXTENSOES_SUPORTADAS = {
     ".pdf",
     ".csv",
+    ".txt",
+    ".xlsx",
+    ".docx",
 }
 
 
