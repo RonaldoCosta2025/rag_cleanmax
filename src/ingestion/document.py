@@ -12,6 +12,9 @@ from dataclasses import dataclass
 @dataclass
 class Documento:
 
+    # armazena todo o texto do documento
     texto: str
+
+    # armazena o nome do arquivo de origem
     arquivo: str
 

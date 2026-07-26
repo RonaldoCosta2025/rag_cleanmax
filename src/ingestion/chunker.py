@@ -1,30 +1,46 @@
+# Importa a classe Chunk.
 from src.ingestion.chunk import Chunk
+
+# Importa a classe Documento.
 from src.ingestion.document import Documento
 
 
+# Define a função responsável por criar chunks de vários documentos.
 def criar_chunks(
-    documento: Documento,
+    documentos: list[Documento],
     tamanho_chunk: int = 500,
     overlap: int = 100
 ) -> list[Chunk]:
 
-    chunks = []
+    # Lista que armazenará todos os chunks de todos os documentos.
+    todos_chunks = []
 
-    inicio = 0
+    # Percorre cada documento carregado.
+    for documento in documentos:
 
-    while inicio < len(documento.texto):
+        # Define o início do primeiro chunk.
+        inicio = 0
 
-        fim = inicio + tamanho_chunk
+        # Continua criando chunks enquanto houver texto.
+        while inicio < len(documento.texto):
 
-        texto_chunk = documento.texto[inicio:fim]
+            # Calcula o final do chunk.
+            fim = inicio + tamanho_chunk
 
-        chunks.append(
-            Chunk(
+            # Extrai o trecho correspondente ao chunk.
+            texto_chunk = documento.texto[inicio:fim]
+
+            # Cria um novo objeto Chunk.
+            chunk = Chunk(
                 texto=texto_chunk,
                 arquivo=documento.arquivo
             )
-        )
 
-        inicio += tamanho_chunk - overlap
+            # Adiciona o chunk à lista geral.
+            todos_chunks.append(chunk)
 
-    return chunks
+            # Avança considerando o overlap.
+            inicio += tamanho_chunk - overlap
+
+    # Retorna todos os chunks gerados.
+    return todos_chunks

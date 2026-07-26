@@ -7,6 +7,8 @@ from src.ingestion.pdf_loader import carregar_pdf
 # Importa o loader responsável por arquivos CSV.
 from src.ingestion.csv_loader import carregar_csv
 
+from src.ingestion.txt_loader import carregar_txt
+
 
 # Define a função que escolhe automaticamente o loader correto.
 def carregar_documento(caminho: Path):
@@ -25,6 +27,10 @@ def carregar_documento(caminho: Path):
 
         # Usa o loader de CSV.
         return carregar_csv(caminho)
+
+    if extensao == '.txt':
+         # Usa o loader de TXT.
+        return carregar_txt(caminho)
 
     # Informa que o formato ainda não é suportado.
     raise ValueError(
