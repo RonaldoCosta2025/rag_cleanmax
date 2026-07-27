@@ -10,7 +10,6 @@ from google import genai
 # Importa a exceção lançada pela API.
 from google.genai.errors import ClientError
 
-
 # Carrega as informações presentes no arquivo .env.
 load_dotenv()
 
@@ -23,10 +22,8 @@ if not api_key:
     # Interrompe a execução caso a chave não exista.
     raise ValueError("GEMINI_API_KEY não encontrada no arquivo .env")
 
-
 # Cria o cliente do Gemini utilizando a chave encontrada.
 client = genai.Client(api_key=api_key)
-
 
 # Define uma função responsável por enviar prompts para o Gemini.
 def gerar_resposta(prompt: str):

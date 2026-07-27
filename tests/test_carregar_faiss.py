@@ -4,7 +4,6 @@ from pathlib import Path
 # Importa a função que carrega um índice FAISS salvo no disco.
 from src.vectorstore.faiss_store import carregar_indice
 
-
 # Define o caminho onde o índice FAISS foi salvo.
 caminho_indice = Path("vectorstore/index.faiss")
 

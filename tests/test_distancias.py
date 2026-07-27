@@ -20,13 +20,11 @@ indice = carregar_indice(caminho_indice)
 # Carrega os chunks para a memória.
 chunks = carregar_chunks(caminho_chunks)
 
-
 # Cria uma lista com perguntas para testar a relevância.
 perguntas = [
     "O que é a CleanMax?",
     "Qual é o salário do diretor da CleanMax?"
 ]
-
 
 # Percorre cada pergunta da lista.
 for pergunta in perguntas:

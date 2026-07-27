@@ -4,7 +4,6 @@ from pathlib import Path
 # Importa o carregador que identifica automaticamente o tipo do documento.
 from src.ingestion.document_loader import carregar_documento
 
-
 # Define os formatos de arquivos que o projeto aceita neste momento.
 EXTENSOES_SUPORTADAS = {
     ".pdf",
@@ -13,7 +12,6 @@ EXTENSOES_SUPORTADAS = {
     ".xlsx",
     ".docx",
 }
-
 
 # Define a função que carrega todos os documentos de uma pasta.
 def carregar_documentos(pasta: Path):

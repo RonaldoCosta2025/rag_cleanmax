@@ -4,8 +4,6 @@ from pathlib import Path
 # Importa a classe Documento utilizada em todo o projeto.
 from src.ingestion.document import Documento
 
-
-
 # Define a função responsável por carregar arquivos TXT.
 def carregar_txt(caminho: Path):
 

@@ -24,7 +24,6 @@ from src.config import (
     CHUNKS_FILE,
 )
 
-
 # Define a função principal da ingestão.
 def ingestir_documentos(pasta_documentos: Path):
 

@@ -20,27 +20,17 @@ def carregar_documento(caminho: Path):
     # Obtém a extensão do arquivo e transforma em letras minúsculas.
     extensao = caminho.suffix.lower()
 
-    # Verifica se o arquivo é um PDF.
+    # verifica o tipo de extensão e carrega
     if extensao == ".pdf":
-
         # Usa o loader de PDF.
-        return carregar_pdf(caminho)
-
-        # Verifica se o arquivo é um CSV.
-    elif extensao == ".csv":
-
-        # Usa o loader de CSV.
+        return carregar_pdf(caminho)       
+    elif extensao == ".csv":        
         return carregar_csv(caminho)
-
-    elif extensao == '.txt':
-        # Usa o loader de TXT.
+    elif extensao == '.txt':       
         return carregar_txt(caminho)
-
     # xlxs
     elif extensao == '.xlsx':
-
         return carregar_xlsx(caminho)
-
     # docx
     elif extensao == '.docx':
         return carregar_docx(caminho)
