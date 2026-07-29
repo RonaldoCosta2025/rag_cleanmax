@@ -164,6 +164,8 @@ streamlit run app.py
 - Importação de pacotes específicos
 - Chamada da API do Gemini
 - Um entendimento melhor sobre centralizar as configurações
+- Utilizar a e construir prompts junto ao Gpt para entendimento 
+ da construção do RAG.
 
 > **Observação:** Optei por não utilizar o LangChain neste projeto para compreender melhor como funciona cada etapa de um pipeline RAG, implementando manualmente os principais componentes.
 ---
