@@ -21,7 +21,7 @@ __pycache__/
 
 # Não vale a pena versioná-lo.
 # Banco vetorial
-/vectorstore/
+vectorstore/
 
 # Configurações pessoais do VS Code.
 .vscode/
