@@ -32,21 +32,17 @@ agente = AgenteRAG(
 pergunta = st.text_input(
     "Digite sua pergunta:"
 )
+
+
 # Botão para enviar.
 if st.button("Perguntar"):
+
+    if pergunta.strip() == '':
+        st.info('Por favor, digite sua pergunta.')
+
     if pergunta:
         # Executa o agente.
-        resultado = agente.perguntar(
-            pergunta
-        )
-        # Mostra as fontes.
-        st.subheader("Fontes utilizadas")
-
-        for fonte in resultado["fontes"]:
-
-            st.write(
-                f"- {fonte}"
-            )
+        resultado = agente.perguntar(pergunta)
 
         # Exibe o título da resposta.
         st.subheader("Resposta")
@@ -58,3 +54,23 @@ if st.button("Perguntar"):
             st.warning(resultado["resposta"])
         else:
             st.write(resultado["resposta"])
+
+        # Mostra as fontes.
+        st.subheader("Fontes utilizadas")
+
+        for fonte in resultado["fontes"]:
+
+            st.write(
+                f"- {fonte}"
+            )
+
+        # # Exibe o título da resposta.
+        # st.subheader("Resposta")
+
+        # # Verifica se a resposta indica que a cota da API foi excedida.
+        # if "limite de utilização da API Gemini" in resultado["resposta"]:
+
+        #     # Exibe um aviso em destaque.
+        #     st.warning(resultado["resposta"])
+        # else:
+        #     st.write(resultado["resposta"])
