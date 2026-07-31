@@ -40,7 +40,7 @@ if st.button("Perguntar"):
     if pergunta.strip() == '':
         st.info('Por favor, digite sua pergunta.')
 
-    if pergunta:
+    else:
         # Executa o agente.
         resultado = agente.perguntar(pergunta)
 
