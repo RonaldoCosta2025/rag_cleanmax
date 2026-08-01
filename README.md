@@ -6,6 +6,13 @@ O projeto utiliza busca vetorial com FAISS, embeddings do Sentence Transformers 
 
 ---
 
+---
+## 🚀 Acesse a aplicação
+
+**Aplicação online:** https://ragcleanmax.streamlit.app/
+
+---
+
 ## 🚀 Demonstração
 
 O usuário faz uma pergunta através da interface Streamlit.
@@ -22,6 +29,10 @@ Fontes:
 
 - produtos.csv
 - 02_Catalogo_Produtos.pdf
+
+Abaixo está uma demonstração da aplicação em funcionamento:
+
+![Demonstração do Agente RAG](assets/demo.gif)
 
 ---
 
